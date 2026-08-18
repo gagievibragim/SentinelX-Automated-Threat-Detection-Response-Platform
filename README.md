@@ -96,7 +96,7 @@ Included rules cover:
 
 ```bash
 git clone https://github.com/gagievibragim/SentinelX-Automated-Threat-Detection-Response-Platform.git
-cd sentinelx
+cd SentinelX-Automated-Threat-Detection-Response-Platform
 docker compose up --build
 ```
 
