@@ -1,0 +1,12 @@
+id: PERSISTENCE-CRON
+name: Cron Persistence
+severity: HIGH
+mitre_technique: T1053.003
+description: Modification or creation of cron jobs indicates possible persistence.
+condition:
+  event_type: file_change
+  equals:
+    source: linux
+  contains_any:
+    - crontab
+    - /etc/cron

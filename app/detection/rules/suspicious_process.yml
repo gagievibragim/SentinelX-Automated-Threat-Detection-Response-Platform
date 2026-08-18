@@ -1,0 +1,11 @@
+id: SUSPICIOUS-PROCESS
+name: Suspicious Shell Spawn
+severity: HIGH
+mitre_technique: T1059
+description: A shell process is launched with a suspicious parent/process context.
+condition:
+  event_type: process_execution
+  contains_any:
+    - cmd.exe /c
+    - powershell -nop
+    - bash -c

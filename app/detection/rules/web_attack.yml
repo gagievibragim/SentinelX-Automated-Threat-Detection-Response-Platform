@@ -1,0 +1,12 @@
+id: WEB-ATTACK
+name: Web Attack Pattern
+severity: HIGH
+mitre_technique: T1190
+description: Web request contains common SQL injection or traversal indicators.
+condition:
+  event_type: web_request
+  contains_any:
+    - union select
+    - ../
+    - or 1=1
+    - select%20

@@ -1,0 +1,9 @@
+id: PORT-SCAN
+name: Port Scan
+severity: MEDIUM
+mitre_technique: T1046
+description: A source repeatedly attempts network connections to multiple ports.
+condition:
+  event_type: network_connection
+  count: 10
+  window_minutes: 2

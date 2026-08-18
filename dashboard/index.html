@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SentinelX SOC Dashboard</title>
+  <link rel="stylesheet" href="/dashboard.css">
+</head>
+<body>
+  <header>
+    <div>
+      <h1>SentinelX</h1>
+      <p>Automated Threat Detection & Response</p>
+    </div>
+    <span id="health">checking...</span>
+  </header>
+
+  <main>
+    <section class="cards">
+      <article><small>EVENTS</small><strong id="events">0</strong></article>
+      <article><small>INCIDENTS</small><strong id="incidents">0</strong></article>
+      <article><small>OPEN</small><strong id="open">0</strong></article>
+      <article><small>HIGH / CRITICAL</small><strong id="danger">0</strong></article>
+    </section>
+
+    <section class="grid">
+      <article class="panel">
+        <h2>Severity</h2>
+        <pre id="severity">{}</pre>
+      </article>
+      <article class="panel">
+        <h2>Detection Rules</h2>
+        <pre id="detections">{}</pre>
+      </article>
+    </section>
+
+    <section class="panel">
+      <div class="row">
+        <h2>Recent Incidents</h2>
+        <button onclick="loadData()">Refresh</button>
+      </div>
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Severity</th><th>Rule</th><th>MITRE</th><th>Risk</th><th>Status</th><th>Created</th></tr>
+        </thead>
+        <tbody id="incidentsTable"></tbody>
+      </table>
+    </section>
+  </main>
+  <script src="/dashboard.js"></script>
+</body>
+</html>

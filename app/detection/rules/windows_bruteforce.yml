@@ -1,0 +1,11 @@
+id: WINDOWS-BRUTE-FORCE
+name: Windows Brute Force
+severity: HIGH
+mitre_technique: T1110
+description: Multiple Windows logon failures from the same source.
+condition:
+  event_type: authentication_failure
+  equals:
+    source: windows
+  count: 5
+  window_minutes: 5

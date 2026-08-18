@@ -1,0 +1,10 @@
+id: IMPOSSIBLE-TRAVEL
+name: Impossible Travel Indicator
+severity: MEDIUM
+mitre_technique: T1078
+description: Authentication activity includes a suspicious geographic transition marker.
+condition:
+  event_type: authentication_success
+  contains_any:
+    - impossible_travel
+    - geo_anomaly

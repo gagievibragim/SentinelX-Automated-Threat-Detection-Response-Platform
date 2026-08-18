@@ -1,0 +1,13 @@
+id: PRIV-ESC
+name: Privilege Escalation Indicator
+severity: HIGH
+mitre_technique: T1548
+description: Linux privilege escalation command or sudo-related activity.
+condition:
+  event_type: process_execution
+  equals:
+    source: linux
+  contains_any:
+    - sudo
+    - setuid
+    - su root

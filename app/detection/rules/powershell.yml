@@ -1,0 +1,15 @@
+id: POWERSHELL-SUSPICIOUS
+name: Suspicious PowerShell
+severity: HIGH
+mitre_technique: T1059.001
+description: PowerShell command contains common obfuscation or stealth indicators.
+condition:
+  event_type: process_execution
+  equals:
+    source: windows
+  contains_any:
+    - encodedcommand
+    - -enc
+    - bypass
+    - hidden
+    - downloadstring

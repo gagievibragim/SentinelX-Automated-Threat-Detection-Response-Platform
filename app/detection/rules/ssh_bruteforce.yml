@@ -1,0 +1,11 @@
+id: SSH-BRUTE-FORCE
+name: SSH Brute Force
+severity: HIGH
+mitre_technique: T1110.001
+description: Multiple SSH authentication failures from the same source.
+condition:
+  event_type: authentication_failure
+  equals:
+    source: linux
+  count: 5
+  window_minutes: 5

@@ -1,0 +1,12 @@
+id: REMOTE-TOOL-TRANSFER
+name: Suspicious Remote Tool Transfer
+severity: HIGH
+mitre_technique: T1105
+description: A script or executable is retrieved from a remote URL.
+condition:
+  event_type: process_execution
+  contains_any:
+    - curl http
+    - wget http
+    - invoke-webrequest
+    - downloadfile

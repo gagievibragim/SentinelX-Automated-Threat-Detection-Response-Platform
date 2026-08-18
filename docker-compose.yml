@@ -1,0 +1,56 @@
+services:
+  api:
+    build: .
+    container_name: sentinelx-api
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql+psycopg2://sentinelx:sentinelx@db:5432/sentinelx
+      REDIS_URL: redis://redis:6379/0
+      RULES_PATH: app/detection/rules
+      RISK_THRESHOLD: 50
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    restart: unless-stopped
+
+  worker:
+    build: .
+    container_name: sentinelx-worker
+    command: celery -A app.worker.celery_app worker --loglevel=info
+    environment:
+      DATABASE_URL: postgresql+psycopg2://sentinelx:sentinelx@db:5432/sentinelx
+      REDIS_URL: redis://redis:6379/0
+      RULES_PATH: app/detection/rules
+      RISK_THRESHOLD: 50
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    container_name: sentinelx-db
+    environment:
+      POSTGRES_USER: sentinelx
+      POSTGRES_PASSWORD: sentinelx
+      POSTGRES_DB: sentinelx
+    volumes:
+      - sentinelx_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sentinelx -d sentinelx"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: sentinelx-redis
+    restart: unless-stopped
+
+volumes:
+  sentinelx_pgdata:
